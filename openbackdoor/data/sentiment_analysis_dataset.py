@@ -9,7 +9,7 @@ from abc import ABC, abstractmethod
 from collections import defaultdict, Counter
 from typing import List, Dict, Callable
 from .data_processor import DataProcessor
-
+from openbackdoor.utils import logger
 
 class ImdbProcessor(DataProcessor):
     """
@@ -87,10 +87,9 @@ class SST2Processor(DataProcessor):
             data_dir = self.path
         path = os.path.join(data_dir,"{}.tsv".format(split))
         with open(path, 'r') as f:
-            reader = csv.DictReader(f, delimiter='\t')
-            for idx, example_json in enumerate(reader):
-                text_a = example_json['sentence'].strip()
-                example = (text_a, int(example_json['label']), 0)
+            for line in f:
+                label, text_a = line.strip().split('\t')
+                example = (text_a, int(label), 0)
                 examples.append(example)
         return examples
 

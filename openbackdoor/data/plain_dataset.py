@@ -25,7 +25,7 @@ class WikitextProcessor(DataProcessor):
         self.data = load_dataset("wikitext", 'wikitext-103-v1')
 
     def get_examples(self, data_dir, split):
-        if split is 'dev':
+        if split == 'dev':
             split = 'validation'
         data_split = self.data[split]
         examples = []
@@ -49,7 +49,7 @@ class WebtextProcessor(DataProcessor):
 
     def get_examples(self, data_dir, split):
         import jsonlines
-        if split is 'dev':
+        if split == 'dev':
             split = 'valid'
         if data_dir is None:
             data_dir = self.path
@@ -90,7 +90,7 @@ class CAGMProcessor(DataProcessor):
         if data_dir is None:
             data_dir = self.path
         output_file = os.path.join(data_dir, "{}.pkl".format(split))
-        if split is "dev":
+        if split == "dev":
             max_count = 20000
         if os.path.exists(output_file) and cached:
             logger.info("Loading processed dataset from %s", output_file)
