@@ -28,7 +28,7 @@ class Attacker(object):
     def __init__(
             self,
             poisoner: Optional[dict] = {"name": "base"},
-            train: Optional[dict] = {"name": "base"},
+            train: Optional[dict] = {"name": "base", "batch_size": 32},
             metrics: Optional[List[str]] = ["accuracy"],
             sample_metrics: Optional[List[str]] = [],
             **kwargs
